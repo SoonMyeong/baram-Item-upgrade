@@ -2,10 +2,12 @@ package com.soonworld.upgrade.controller;
 
 
 import com.soonworld.upgrade.controller.dto.UpgradeItemRequestDto;
+import com.soonworld.upgrade.controller.dto.UpgradeItemResponseDto;
 import com.soonworld.upgrade.service.UpgradeItemService;
+import com.soonworld.upgrade.service.vo.UpgradeItem;
+import lombok.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,9 +25,17 @@ public class UpgradeController {
 
 
     @GetMapping("/upgrade")
-    public Mono<ResponseEntity<String>> upgradeItem(@RequestBody UpgradeItemRequestDto request){
-//        upgradeItemService.upgradeItem(upgradeItemService.upgradeItem();
-        return Mono.just(ResponseEntity.ok("MSA 테스트"));
+    public Mono<ResponseEntity<UpgradeItemResponseDto>> upgradeItem(@RequestBody @NonNull UpgradeItemRequestDto requestDto){
+        UpgradeItem item = upgradeItemService.upgradeItem(UpgradeItem.builder()
+                .currentItemLevel(requestDto.getCurrentItemLevel())
+                .upgradeDoubleItemUsed(requestDto.isUpgradeDoubleItemUsed())
+                .upgradeItemUsed(requestDto.isUpgradeItemUsed())
+                .build());
+
+        return Mono.just(ResponseEntity.ok(UpgradeItemResponseDto.builder()
+                .resultItemAddLevel(item.getResultItemAddLevel())
+                .upgradeResult(item.isUpgradeResult())
+                .build()));
     }
 
 }

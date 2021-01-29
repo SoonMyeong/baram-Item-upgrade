@@ -38,13 +38,4 @@ public class UpgradeController {
 
     }
 
-    @PostMapping("/test")
-    public Mono<UpgradeItemResponseDto> test(@RequestBody UpgradeItemRequestDto requestDto){
-
-        return Mono.just(UpgradeItemResponseDto.builder()
-        .resultItemAddLevel(1)
-        .upgradeResult(true).build());
-
-    }
-
 }

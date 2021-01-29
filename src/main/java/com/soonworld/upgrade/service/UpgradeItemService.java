@@ -16,7 +16,6 @@ public class UpgradeItemService {
     }
 
     public UpgradeItem upgradeItem(UpgradeItem item) throws NullPointerException{
-        UpgradeItem result = new UpgradeItem();
         try {
             if(!item.isUpgradeItemUsed() && !item.isUpgradeDoubleItemUsed()) { //강화비급x, 강화촉진제 x
                 route.routeUpgradeMethod(item,1);
@@ -31,6 +30,6 @@ public class UpgradeItemService {
             System.out.println("NullPointer Exception.");
         }
 
-        return result;
+        return item;
     }
 }

@@ -16,7 +16,6 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.BDDMockito.*;
 
 @RunWith(SpringRunner.class)
-@AutoConfigureMockMvc
 public class UpgradeServiceTest {
 
     @MockBean

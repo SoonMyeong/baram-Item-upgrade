@@ -4,6 +4,7 @@ import com.soonworld.upgrade.service.vo.UpgradeItem;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Mono;
 
 @Service
 public class UpgradeItemService {
@@ -15,7 +16,7 @@ public class UpgradeItemService {
         this.route = route;
     }
 
-    public UpgradeItem upgradeItem(UpgradeItem item) throws NullPointerException{
+    public Mono<UpgradeItem> upgradeItem(UpgradeItem item) throws NullPointerException{
         try {
             if(!item.isUpgradeItemUsed() && !item.isUpgradeDoubleItemUsed()) { //강화비급x, 강화촉진제 x
                 route.routeUpgradeMethod(item,1);
@@ -30,6 +31,6 @@ public class UpgradeItemService {
             System.out.println("NullPointer Exception.");
         }
 
-        return item;
+        return Mono.just(item);
     }
 }

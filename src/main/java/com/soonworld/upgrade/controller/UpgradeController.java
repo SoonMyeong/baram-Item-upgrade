@@ -27,15 +27,13 @@ public class UpgradeController {
 
     @PostMapping("/upgrade")
     public Mono<UpgradeItemResponseDto> upgradeItem(@RequestBody UpgradeItemRequestDto requestDto){
-
-        return Mono.just(modelMapperUtil.modelMapper().map(upgradeItemService.upgradeItem(
-                UpgradeItem.builder()
+        return upgradeItemService.upgradeItem(UpgradeItem.builder()
                 .currentItemLevel(requestDto.getCurrentItemLevel())
-                .upgradeDoubleItemUsed(requestDto.isUpgradeDoubleItemUsed())
                 .upgradeItemUsed(requestDto.isUpgradeItemUsed())
-                .build())
-                ,UpgradeItemResponseDto.class));
-
+                .upgradeDoubleItemUsed(requestDto.isUpgradeDoubleItemUsed())
+                .build()).map(v -> UpgradeItemResponseDto.builder()
+                                    .upgradeResult(v.isUpgradeResult())
+                                    .resultItemAddLevel(v.getResultItemAddLevel())
+                                    .build());
     }
-
 }

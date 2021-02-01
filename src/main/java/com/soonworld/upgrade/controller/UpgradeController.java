@@ -15,13 +15,10 @@ import reactor.core.publisher.Mono;
 @RestController
 public class UpgradeController {
 
-
-    private ModelMapperUtil modelMapperUtil;
     private final UpgradeItemService upgradeItemService;
 
     @Autowired
-    public UpgradeController(ModelMapperUtil modelMapperUtil, UpgradeItemService upgradeItemService) {
-        this.modelMapperUtil = modelMapperUtil;
+    public UpgradeController(UpgradeItemService upgradeItemService) {
         this.upgradeItemService = upgradeItemService;
     }
 

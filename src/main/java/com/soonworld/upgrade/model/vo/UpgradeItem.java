@@ -1,9 +1,9 @@
-package com.soonworld.upgrade.service.vo;
+package com.soonworld.upgrade.model.vo;
 
 import lombok.*;
 
 @Builder
-@Data
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
 public class UpgradeItem {

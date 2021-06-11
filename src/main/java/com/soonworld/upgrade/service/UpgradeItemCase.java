@@ -1,6 +1,6 @@
 package com.soonworld.upgrade.service;
 
-import com.soonworld.upgrade.service.vo.UpgradeItem;
+import com.soonworld.upgrade.model.vo.UpgradeItem;
 import org.springframework.stereotype.Component;
 
 @Component

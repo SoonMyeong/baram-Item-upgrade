@@ -1,4 +1,4 @@
-package com.soonworld.upgrade.controller.dto;
+package com.soonworld.upgrade.model.dto;
 
 
 import lombok.*;
@@ -13,7 +13,7 @@ import lombok.*;
  */
 
 @Builder
-@Data
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
 public class UpgradeItemRequestDto {

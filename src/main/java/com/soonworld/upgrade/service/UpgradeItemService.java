@@ -43,7 +43,7 @@ public class UpgradeItemService {
      * 아래 파라미터를 입력 받아 확률에 따라 강화 성공과 실패 그리고 유지를 결정 짓고 <br>
      *  Vo를 만들어 리턴 하는 메소드
      *
-     * @param result  강솨 성공 결과
+     * @param result  강화 결과
      * @param percent  현재 장비 레벨에서의 강화 성공 확률
      * @param upgradeB 강화비급 (3%)
      * @param upgradeC 강화촉진제 (50%)
@@ -53,7 +53,7 @@ public class UpgradeItemService {
         int resultItemAddLevel = 0;
         boolean upgradeResult = false;
 
-        if(result<=percent+upgradeB) {
+        if(percent<=result+upgradeB) {
             upgradeResult = true;
             if(upgradeC>50) {
                 resultItemAddLevel = 2;

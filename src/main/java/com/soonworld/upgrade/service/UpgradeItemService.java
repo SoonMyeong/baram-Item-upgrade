@@ -16,7 +16,6 @@ public class UpgradeItemService {
      *
      * @param item
      * @return
-     * @throws NullPointerException
      */
     public Mono<UpgradeItem> upgradeItem(UpgradeItem item) throws NullPointerException {
         //강화 결과
@@ -26,16 +25,16 @@ public class UpgradeItemService {
         //강화 비급 확률 3%
         int upgradeB = 3;
         //강화 촉진제 사용 결과 확률
-        int upgraceC = (int) (Math.random() * 100) + 1;
+        int upgradeC = (int) (Math.random() * 100) + 1;
 
         if (!item.isUpgradeItemUsed() && !item.isUpgradeDoubleItemUsed()) { //강화비급 x, 강화촉진제 x
             return upgrade(result,percent,0,0);
         } else if (item.isUpgradeItemUsed() && !item.isUpgradeDoubleItemUsed()) { //강화비급 o, 강화촉진제 x
             return upgrade(result,percent,upgradeB,0);
         } else if (!item.isUpgradeItemUsed() && item.isUpgradeDoubleItemUsed()) { //강화비급 x , 강화촉진제 o
-            return upgrade(result,percent,0,upgraceC);
+            return upgrade(result,percent,0,upgradeC);
         } else {  //강화비급 o , 강화촉진제 o
-            return upgrade(result,percent,upgradeB,upgraceC);
+            return upgrade(result,percent,upgradeB,upgradeC);
         }
     }
 
@@ -43,7 +42,7 @@ public class UpgradeItemService {
      * 아래 파라미터를 입력 받아 확률에 따라 강화 성공과 실패 그리고 유지를 결정 짓고 <br>
      *  Vo를 만들어 리턴 하는 메소드
      *
-     * @param result  강솨 성공 결과
+     * @param result  강화 결과
      * @param percent  현재 장비 레벨에서의 강화 성공 확률
      * @param upgradeB 강화비급 (3%)
      * @param upgradeC 강화촉진제 (50%)
@@ -53,7 +52,7 @@ public class UpgradeItemService {
         int resultItemAddLevel = 0;
         boolean upgradeResult = false;
 
-        if(result<=percent+upgradeB) {
+        if(percent>=result-upgradeB) {
             upgradeResult = true;
             if(upgradeC>50) {
                 resultItemAddLevel = 2;
@@ -61,9 +60,7 @@ public class UpgradeItemService {
                 resultItemAddLevel = 1;
             }
         }else {
-            //강화 유지 확률 30%
-            int addNum = (int) (Math.random()*100)+1;
-            if(addNum>30){
+            if(result<30){
                 resultItemAddLevel = -1;
             }
         }

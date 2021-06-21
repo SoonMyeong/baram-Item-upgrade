@@ -30,7 +30,7 @@ public class UpgradeItemHandler {
                                                 .upgradeResult(res.isUpgradeResult())
                                                 .resultItemAddLevel(res.getResultItemAddLevel())
                                                 .build();
-                                        return ServerResponse.ok().body(responseDto,UpgradeItemResponseDto.class);
+                                        return ServerResponse.ok().bodyValue(responseDto);
                                     })
                             .onErrorResume(e->ServerResponse.badRequest().bodyValue(e.getMessage()));
                 })

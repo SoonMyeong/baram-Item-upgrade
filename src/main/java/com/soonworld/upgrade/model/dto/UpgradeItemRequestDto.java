@@ -17,10 +17,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UpgradeItemRequestDto {
-    @NonNull
     private int currentItemLevel;
-    @NonNull
     private boolean upgradeItemUsed;
-    @NonNull
     private boolean upgradeDoubleItemUsed;
 }

@@ -14,8 +14,6 @@ import lombok.*;
 
 @Builder
 @Getter
-@AllArgsConstructor
-@NoArgsConstructor
 public class UpgradeItemRequestDto {
     private int currentItemLevel;
     private boolean upgradeItemUsed;

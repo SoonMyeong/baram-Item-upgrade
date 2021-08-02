@@ -12,7 +12,6 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
-import org.springframework.web.server.ServerWebInputException;
 import reactor.core.publisher.Mono;
 
 @Component
@@ -47,11 +46,10 @@ public class UpgradeItemHandler {
     }
 
     private void validate(UpgradeItemRequestDto requestDto) {
-        System.out.println("test");
         Errors errors = new BeanPropertyBindingResult(requestDto, UpgradeItemRequestDto.class.getName());
         validator.validate(requestDto, errors);
-        if (errors.hasErrors()) {
-            throw new ServerWebInputException(errors.toString());
+        if (!errors.getAllErrors().isEmpty()) {
+            throw new CustomException(errors.getAllErrors().get(0).getDefaultMessage());
         }
     }
 }

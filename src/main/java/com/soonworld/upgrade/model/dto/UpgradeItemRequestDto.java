@@ -1,9 +1,9 @@
 package com.soonworld.upgrade.model.dto;
 
 
-import lombok.*;
+import lombok.Getter;
 
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Min;
 
 /**
  * 장비 업데이트시 전달 받을 request DTO
@@ -16,10 +16,8 @@ import javax.validation.constraints.NotNull;
 
 @Getter
 public class UpgradeItemRequestDto {
-    @NotNull(message = "반드시 값이 존재 해야 합니다.")
+    @Min(value = 1, message = "최소 설정 레벨은 1 부터 입니다.")
     private int currentItemLevel;
-    @NotNull(message = "반드시 값이 존재 해야 합니다.")
     private boolean upgradeItemUsed;
-    @NotNull(message = "반드시 값이 존재 해야 합니다.")
     private boolean upgradeDoubleItemUsed;
 }
